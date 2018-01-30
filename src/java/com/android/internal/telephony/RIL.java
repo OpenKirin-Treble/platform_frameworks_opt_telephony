@@ -4916,6 +4916,30 @@ public final class RIL extends BaseCommands implements CommandsInterface {
 
     static SignalStrength convertHalSignalStrength(
             android.hardware.radio.V1_0.SignalStrength signalStrength) {
+
+        /* LTE */
+        if (signalStrength.lte.rsrp >= -97) {
+            signalStrength.lte.signalStrength = 63;
+            signalStrength.lte.rssnr = 130;
+            signalStrength.lte.rsrp = -98;
+        } else if (signalStrength.lte.rsrp >= -105) {
+            signalStrength.lte.signalStrength = 10;
+            signalStrength.lte.rssnr = 45;
+            signalStrength.lte.rsrp = -108;
+        } else if (signalStrength.lte.rsrp >= -113) {
+            signalStrength.lte.signalStrength = 5;
+            signalStrength.lte.rssnr = 10;
+            signalStrength.lte.rsrp = -118;
+        } else if (signalStrength.lte.rsrp >= -125) {
+            signalStrength.lte.signalStrength = 3;
+            signalStrength.lte.rssnr = -30;
+            signalStrength.lte.rsrp = -128;
+        } else if (signalStrength.lte.rsrp >= -44) {
+            signalStrength.lte.signalStrength = 64;
+            signalStrength.lte.rssnr = -200;
+            signalStrength.lte.rsrp = -140;
+        }
+
         return new SignalStrength(signalStrength.gw.signalStrength,
                 signalStrength.gw.bitErrorRate,
                 signalStrength.cdma.dbm,
